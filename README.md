@@ -54,6 +54,7 @@ Abra index.html em um navegador:
 |-- backend/  # Código do servidor (Node.js)
 |-- frontend/ # Código do cliente (HTML, CSS, JS puro)
 |-- README.md # Documentação do projeto
+|-- LICENSE # Licença do projeto
 ```
 
 ## Contato
