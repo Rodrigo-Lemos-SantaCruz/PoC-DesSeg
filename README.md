@@ -26,7 +26,7 @@ Isso deve retornar as versões do Node.js e npm, indicando que a instalação fo
 
 ### 3. Clonar este repositório
 ```sh
-git clone https://github.com/seu-usuario/seu-repositorio.git
+git clone [https://github.com/seu-usuario/seu-repositorio.git](https://github.com/Rodrigo-Lemos-SantaCruz/PoC-DesSeg.git)
 ```
 
 ### 4. Acessar o diretório do backend
