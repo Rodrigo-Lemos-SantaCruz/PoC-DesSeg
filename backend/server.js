@@ -22,6 +22,29 @@ const usuariosSeguros = {
     'user': { senha: '$2a$12$eyG5Csoyt/5tVXkMoADt3OB.PxsO2qr6p7H9lx6w4CfReHl3S1THm', funcao: 'user' } // senha 'abcd'
 }
 
+//Função que verifica token
+function autenticarToken(req, res, next) {
+    const authHeader = req.headers['authorization'];
+    const token = authHeader && authHeader.split(' ')[1];
+
+    if (!token) return res.status(401).json({ mensagem: 'Token não fornecido' });
+
+    jwt.verify(token, SEGREDO, (err, usuario) => {
+        if (err) return res.status(403).json({ mensagem: 'Token inválido' });
+
+        req.usuario = usuario; // guarda no request para uso posterior
+        next();
+    });
+}
+//Rota restrita
+app.get('/restrita', autenticarToken, (req, res) => {
+    console.log('aqui')
+    if (req.usuario.funcao !== 'admin') {
+        return res.status(403).json({ mensagem: 'Acesso negado: apenas administradores' });
+    }
+
+    res.json({ mensagem: `Bem-vindo, ${req.usuario.nome}. Você está na área restrita!` });
+})
 // Rota de login
 app.post('/login', (req, res) => {
     const { nome, senha } = req.body;

@@ -11,6 +11,25 @@
     <a href="index.html" onclick="logout()">Sair</a>
 </body>
 <script>
+    const token = localStorage.getItem("token");
+
+    fetch("http://localhost:3000/restrita", {
+        headers: {
+            Authorization: "Bearer " + token
+        }
+    })
+    .then(res => {
+        if (res.ok) return res.json();
+        throw new Error("Acesso negado");
+    })
+    .then(data => {
+        console.log(data.mensagem)
+    })
+    .catch(() => {
+        alert('Acesso negado')
+        window.location.href = "index.html"
+    })
+
     function logout() {
         localStorage.removeItem("token");
     }
