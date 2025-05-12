@@ -8,6 +8,11 @@
 <body>
     <h2>Bem-vindo à Página Aberta</h2>
     <p>Qualquer usuário pode acessar esta página.</p>
-    <a href="index.html">Sair</a>
+    <a href="index.html" onclick="logout()">Sair</a>
 </body>
+<script>
+    function logout() {
+        localStorage.removeItem("token");
+    }
+</script>
 </html>

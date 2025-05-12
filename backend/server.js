@@ -5,6 +5,10 @@ const app = express();
 const PORT = 3000;
 app.use(express.json());
 app.use(cors());
+const jwt = require('jsonwebtoken');
+
+//Senha do JWT
+const SEGREDO = 'DesenvolvimentoSeguro2025.1';
 
 // Simulação de BD
 const usuarios = { 
@@ -27,7 +31,8 @@ app.post('/login', (req, res) => {
             .then(resultado => {
                 if (resultado) {
                     console.log(nome+' fez login com a senha '+senha)
-                    res.json({ sucesso: true, funcao: usuario.funcao })
+                    const token = jwt.sign({ nome, funcao: usuario.funcao }, SEGREDO, { expiresIn: '1h' })
+                    res.json({ sucesso: true, token, funcao: usuario.funcao })
                 }
                 else {
                     console.error(nome+' tentou login com a senha '+senha)
